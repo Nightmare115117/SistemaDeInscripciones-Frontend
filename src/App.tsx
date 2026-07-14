@@ -36,16 +36,8 @@ function App() {
         <Navbar />
       </header>
 
-      <section className="min-h-screen flex items-center justify-center gap-8 px-6">
-        <div className="flex flex-row gap-6">
-          <LiquidGlassCard className="w-full max-w-md p-8" interactive>
-              <h1 className="text-6xl md:text-8xl font-bold tracking-light text-black">Bienvenido</h1>
-          </LiquidGlassCard>
+      <section >
 
-          <LiquidGlassCard className="w-full max-w-md p-8" >
-            <LocationMap/>
-          </LiquidGlassCard>
-        </div>
       </section>
     </main>
   );

@@ -33,11 +33,16 @@
         <LiquidGlassCard className="px-6 py-3">
             <LayoutGroup>
             <nav className="flex items-center justify-between">
-            {/* Logo */}
-            <h1 className="text-xl font-bold text-white">
-                Hackathon
-            </h1>
-
+            <div className="flex items-center gap-3">
+                <img 
+                    src="/blanco_sin_fondo.png" 
+                    className="h-10 w-10 scale-150 object-contain"
+                    alt="Logo"
+                    />
+                <h1 className="text-xl font-bold text-white">
+                    Hackathon
+                </h1>
+            </div>
             {/* Enlaces */}
                 <div className="flex items-center gap-1 rounded-full bg-white/5 p-1">
                     {links.map((link) => (
