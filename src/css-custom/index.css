@@ -27,7 +27,7 @@
 .glass-liquid {
   background: rgba(255,255,255,0.12);
 
-  backdrop-filter: blur(1px) url(#lg-filter) blur(2px) saturate(1.5) brightness(1.1);
+  backdrop-filter: blur(1px) blur(2px) saturate(1.5) brightness(1.1);
   -webkit-backdrop-filter: blur(8px) saturate(1.8) brightness(1.15) contrast(1.05);
 
   box-shadow:
