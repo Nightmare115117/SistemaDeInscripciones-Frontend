@@ -1,5 +1,6 @@
 import { LiquidGlassCard } from "@/components-custom/GlassCard";
 // src/components/ui/liquid-glass-filter.tsx
+import { LocationMap } from "./components-custom/InteractiveMap";
 
 function App() {
   return (
@@ -28,13 +29,19 @@ function App() {
           blur-3xl
         "
       />
+
+      <div className="flex flex-row gap-6">
         <LiquidGlassCard className="w-full max-w-md p-8" interactive>
         
           <h1 className="text-4xl font-bold text-black">Registro Hackathon</h1>
           <p className="mt-3 text-white/60">Sistema de inscripciones</p>
 
         </LiquidGlassCard>
-    
+
+        <LiquidGlassCard className="w-full max-w-md p-8" >
+          <LocationMap/>
+        </LiquidGlassCard>
+      </div>
     </main>
   );
 }
