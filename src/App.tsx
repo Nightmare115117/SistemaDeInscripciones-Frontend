@@ -1,6 +1,8 @@
 import { LiquidGlassCard } from "@/components-custom/GlassCard";
 // src/components/ui/liquid-glass-filter.tsx
 import { LocationMap } from "./components-custom/InteractiveMap";
+import { Navbar } from "./components-custom/Navbar";
+import "@/css-custom/App.css"
 
 function App() {
   return (
@@ -30,18 +32,21 @@ function App() {
         "
       />
 
-      <div className="flex flex-row gap-6">
-        <LiquidGlassCard className="w-full max-w-md p-8" interactive>
-        
-          <h1 className="text-4xl font-bold text-black">Registro Hackathon</h1>
-          <p className="mt-3 text-white/60">Sistema de inscripciones</p>
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-6">
+        <Navbar />
+      </header>
 
-        </LiquidGlassCard>
+      <section className="min-h-screen flex items-center justify-center gap-8 px-6">
+        <div className="flex flex-row gap-6">
+          <LiquidGlassCard className="w-full max-w-md p-8" interactive>
+              <h1 className="text-6xl md:text-8xl font-bold tracking-light text-black">Bienvenido</h1>
+          </LiquidGlassCard>
 
-        <LiquidGlassCard className="w-full max-w-md p-8" >
-          <LocationMap/>
-        </LiquidGlassCard>
-      </div>
+          <LiquidGlassCard className="w-full max-w-md p-8" >
+            <LocationMap/>
+          </LiquidGlassCard>
+        </div>
+      </section>
     </main>
   );
 }
