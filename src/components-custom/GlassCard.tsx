@@ -7,11 +7,13 @@ export function LiquidGlassCard({
   children,
   interactive = false,
   style,
+  variant = "card",
 }: {
   className?: string;
   children: React.ReactNode;
   interactive?: boolean;
   style?: React.CSSProperties;
+  variant?: "card" | "nav";
 }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -36,7 +38,11 @@ export function LiquidGlassCard({
       onMouseLeave={() => interactive && setIsHovering(false)}
       whileHover={interactive ? { scale: 1.01 } : undefined}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className={cn("glass-liquid relative overflow-hidden rounded-[40px] p-6", className)}
+      className={cn(
+        variant === "nav" ? "glass-nav" : "glass-liquid",
+        "relative isolate overflow-hidden rounded-[40px] p-6 transform-gpu",
+        className
+      )}
       style={style}
     >
       {interactive && (
