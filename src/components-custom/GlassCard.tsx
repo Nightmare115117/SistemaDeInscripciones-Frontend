@@ -1,42 +1,55 @@
-import { motion, useMotionValue, useTransform } from "motion/react";
+import { motion, useMotionValue, useTransform, AnimatePresence } from "motion/react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-export function LiquidGlassCard({ className, children }: { className?: string; children: React.ReactNode }) {
-  return (
-    <div className={cn("glass-liquid rounded-[40px] w-[420px] h-[280px]", className)}>
-      {children}
-    </div>
-  );
-}
-
-export function GlassCard({ className, children }: { className?: string; children: React.ReactNode }) {
+export function LiquidGlassCard({
+  className,
+  children,
+  interactive = false,
+}: {
+  className?: string;
+  children: React.ReactNode;
+  interactive?: boolean;
+}) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const [isHovering, setIsHovering] = useState(false);
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (!interactive) return;
     const rect = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left);
     mouseY.set(e.clientY - rect.top);
   }
 
   const highlight = useTransform(
-    [mouseX, mouseY],
-    ([x, y]) => `radial-gradient(300px circle at ${x}px ${y}px, oklch(1 0 0 / 0.15), transparent 70%)`
+  [mouseX, mouseY],
+  ([x, y]) => `radial-gradient(circle 180px at ${x}px ${y}px, rgba(255,255,255,0.25), transparent 70%)`
   );
 
   return (
     <motion.div
       onMouseMove={handleMouseMove}
-      whileHover={{ scale: 1.01 }}
-      className={cn(
-        "glass relative overflow-hidden rounded-3xl p-6",
-        className
-      )}
+      onMouseEnter={() => interactive && setIsHovering(true)}
+      onMouseLeave={() => interactive && setIsHovering(false)}
+      whileHover={interactive ? { scale: 1.01 } : undefined}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      className={cn("glass-liquid relative overflow-hidden rounded-[40px] p-6", className)}
     >
-      <motion.div
-        className="pointer-events-none absolute inset-0"
-        style={{ background: highlight }}
-      />
+      {interactive && (
+        <AnimatePresence>
+          {isHovering && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="pointer-events-none absolute inset-0"
+              style={{ background: highlight }}
+            />
+          )}
+        </AnimatePresence>
+      )}
       <div className="relative z-10">{children}</div>
     </motion.div>
   );
