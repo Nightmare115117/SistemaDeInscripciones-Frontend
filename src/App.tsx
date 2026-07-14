@@ -1,4 +1,5 @@
 import { LiquidGlassCard } from "@/components-custom/GlassCard";
+import { Countdown } from "./components-custom/Countdown";
 // src/components/ui/liquid-glass-filter.tsx
 import { LocationMap } from "./components-custom/InteractiveMap";
 import { Navbar } from "./components-custom/Navbar";
@@ -49,6 +50,7 @@ function App() {
           <h1 className="text-6xl font-bold">
             Bienvenido
           </h1>
+          <Countdown targetDate={new Date("2026-10-12T12:30:00")} />
         </LiquidGlassCard>
       </section>
 
