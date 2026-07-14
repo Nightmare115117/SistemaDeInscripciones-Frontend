@@ -19,12 +19,12 @@ function App() {
       <div
         className="
           absolute
-          -bottom-32
-          -right-32
-          h-96
-          w-96
+          -bottom-40
+          -right-40
+          h-150
+          w-200
           rounded-full
-          bg-blue-500/40
+          bg-[rgb(0,0,128)]/40
           blur-3xl
         "
       />
