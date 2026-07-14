@@ -32,9 +32,7 @@ function App() {
         "
       />
 
-      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-6">
-        <Navbar />
-      </header>
+      <Navbar />
 
       <section
         id="inicio"
