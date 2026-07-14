@@ -6,7 +6,7 @@ import "@/css-custom/App.css"
 
 function App() {
   return (
-    <main className="relative min-h-screen flex items-center justify-center p-6 overflow-hidden">
+    <main className="relative min-h-screen overflow-hidden">
       <div
         className="
           absolute
@@ -56,7 +56,7 @@ function App() {
 
 
       <section
-        id="registro"
+        id="itinerario"
         className="
           min-h-screen
           flex
