@@ -10,8 +10,8 @@
         const [active, setActive] = useState("inicio");
         const links = [
                         { id: "inicio", label: "Inicio" },
-                        { id: "registro", label: "Registro" },
-                        { id: "equipos", label: "Equipos" },
+                        { id: "itinerario", label: "Itinerario" },
+                        { id: "ubicacion", label: "Ubicación" },
                         { id: "faq", label: "FAQ" },];
 
     return (
