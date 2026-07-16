@@ -102,7 +102,7 @@ body::before {
     radial-gradient(circle at 80% 25%, rgba(37, 99, 235, 0.28), transparent 22%),
     radial-gradient(circle at 50% 80%, rgba(29, 78, 216, 0.25), transparent 30%);
 
-  filter: blur(120px);
+  filter: blur(60px);
   animation: aurora 24s ease-in-out infinite alternate;
 }
 
@@ -118,7 +118,7 @@ body::after {
     radial-gradient(circle at 70% 40%, rgba(250, 204, 21, 0.18), transparent 18%),
     radial-gradient(circle at 35% 75%, rgba(250, 204, 21, 0.10), transparent 15%);
 
-  filter: blur(100px);
+  filter: blur(40px);
   animation: auroraReverse 30s ease-in-out infinite alternate;
 }
 
@@ -179,12 +179,12 @@ body::after {
      Bajamos el radio de blur y el área (inset) sin tocar ningún color. */
   body::before {
     inset: -15%;
-    filter: blur(60px);
+    filter: blur(30px);
   }
 
   body::after {
     inset: -15%;
-    filter: blur(50px);
+    filter: blur(10px);
   }
 }
 
