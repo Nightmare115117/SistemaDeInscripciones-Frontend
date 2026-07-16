@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { Countdown } from "./components-custom/Countdown";
 // src/components/ui/liquid-glass-filter.tsx
 import { useEffect, useState } from "react";
-import { Button } from "./components/ui/button";
 import { LocationMap } from "./components-custom/InteractiveMap";
 import { Navbar } from "./components-custom/Navbar";
 import "@/css-custom/App.css"
@@ -64,7 +63,7 @@ function App() {
           blur-3xl
         "
       />
-      
+
         <Navbar />
 
       <section
