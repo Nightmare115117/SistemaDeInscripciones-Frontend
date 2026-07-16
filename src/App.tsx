@@ -2,7 +2,8 @@ import { LiquidGlassCard } from "@/components-custom/GlassCard";
 import { AnimatePresence, motion } from "motion/react";
 import { Countdown } from "./components-custom/Countdown";
 // src/components/ui/liquid-glass-filter.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "./components/ui/button";
 import { LocationMap } from "./components-custom/InteractiveMap";
 import { Navbar } from "./components-custom/Navbar";
 import "@/css-custom/App.css"
@@ -10,6 +11,14 @@ import { SegmentedControl } from "./components-custom/SegmentOption";
 
 function App() {
   const [selectedDay, setSelectedDay] = useState("dia1");
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    fetch('https://sistemadeinscripciones.onrender.com/api/registro/count', {})
+    .then((res) => res.json())
+    .then((data) => setTotal(data.total))
+    .catch((err) => console.error(err));
+  }, []);
 
   const schedule: Record<string, { time: string; activity: string }[]> = {
     dia1: [
@@ -55,8 +64,8 @@ function App() {
           blur-3xl
         "
       />
-
-      <Navbar />
+      
+        <Navbar />
 
       <section
         id="inicio"
@@ -74,6 +83,7 @@ function App() {
             Bienvenido
           </h1>
           <Countdown targetDate={new Date("2026-10-12T12:30:00")} />
+          <h2>{47 - total}</h2>
         </LiquidGlassCard>
       </section>
 
@@ -146,13 +156,34 @@ function App() {
         "
       >
         <LiquidGlassCard className="p-8">
-          <h2 className="text-4xl font-bold">
-            Ubicación      
-          </h2>
-          <LocationMap />
+          <div className="flex gap-8">
+            <LocationMap />
+
+            <div>
+              <h3>Instituto Tecnológico de Saltillo</h3>
+              <p>Blvd. Venustiano Carranza...</p>
+            </div>
+          </div>
         </LiquidGlassCard>
       </section>
 
+      <section
+        id="requisitos"
+        className="
+          min-h-screen
+          flex
+          items-center
+          justify-center
+          px-6
+          "
+          >
+        <LiquidGlassCard className="p-8">
+          <h2 className="text-4x1 font-bold">
+            Requisitos
+          </h2>
+        </LiquidGlassCard>
+      </section>
+      
 
       <section
         id="faq"
