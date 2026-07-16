@@ -64,7 +64,7 @@ export function SegmentedControl({
           }}
           onClick={() => onChange(option.id)}
           className={cn(
-            "relative z-10 rounded-full px-5 py-2 text-sm font-medium transition-colors duration-300",
+            "relative z-10 rounded-full px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors duration-300",
             value === option.id ? "text-white" : "text-white/60 hover:text-white/80"
           )}
         >

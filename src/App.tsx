@@ -1,7 +1,6 @@
 import { LiquidGlassCard } from "@/components-custom/GlassCard";
 import { AnimatePresence, motion } from "motion/react";
 import { Countdown } from "./components-custom/Countdown";
-// src/components/ui/liquid-glass-filter.tsx
 import { useEffect, useState } from "react";
 import { LocationMap } from "./components-custom/InteractiveMap";
 import { Navbar } from "./components-custom/Navbar";
@@ -49,16 +48,16 @@ function App() {
           flex
           items-center
           justify-center
-          px-6
-          pt-32
+          px-4 sm:px-6
+          pt-24 md:pt-32
         "
       >
-        <LiquidGlassCard className="p-8">
-          <h1 className="text-6xl font-bold">
+        <LiquidGlassCard className="p-5 sm:p-8 flex flex-col items-center gap-4 sm:gap-6 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold">
             Bienvenido
           </h1>
           <Countdown targetDate={new Date("2026-10-12T12:30:00")} />
-          <h2>{47 - total}</h2>
+          <h2 className="text-sm sm:text-base text-white/70">{47 - total} lugares disponibles</h2>
         </LiquidGlassCard>
       </section>
 
@@ -70,14 +69,14 @@ function App() {
           flex
           items-center
           justify-center
-          px-6
+          px-4 sm:px-6
         "
       >
-        <LiquidGlassCard className="p-8 w-full max-w-lg flex flex-col items-center" interactive>
-          <h2 className="text-4xl font-bold">
+        <LiquidGlassCard className="p-5 sm:p-8 w-full max-w-lg flex flex-col items-center" interactive>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             Itinerario
           </h2>
- 
+
           <SegmentedControl
             options={[
               { id: "dia1", label: "Día 1" },
@@ -85,9 +84,9 @@ function App() {
             ]}
             value={selectedDay}
             onChange={setSelectedDay}
-            className="mt-8"
+            className="mt-6 sm:mt-8"
           />
- 
+
           <div className="w-full min-h-[220px] mt-6">
             <AnimatePresence mode="wait">
               <motion.ul
@@ -98,19 +97,19 @@ function App() {
                 transition={{ duration: 0.25, ease: "easeOut" }}
                 className={
                   selectedDay === "dia2"
-                    ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
-                    : "flex flex-col gap-3"
+                    ? "grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3"
+                    : "flex flex-col gap-2 sm:gap-3"
                 }
               >
                 {schedule[selectedDay].map((item) => (
                   <li
                     key={item.time}
-                    className="flex items-center gap-4 rounded-2xl bg-white/5 px-4 py-3"
+                    className="flex items-center gap-3 sm:gap-4 rounded-2xl bg-white/5 px-3 sm:px-4 py-2.5 sm:py-3"
                   >
-                    <span className="text-sm font-semibold text-white/70 w-14 shrink-0">
+                    <span className="text-xs sm:text-sm font-semibold text-white/70 w-12 sm:w-14 shrink-0">
                       {item.time}
                     </span>
-                    <span className="text-white">{item.activity}</span>
+                    <span className="text-sm sm:text-base text-white">{item.activity}</span>
                   </li>
                 ))}
               </motion.ul>
@@ -127,16 +126,16 @@ function App() {
           flex
           items-center
           justify-center
-          px-6
+          px-4 sm:px-6
         "
       >
-        <LiquidGlassCard className="p-8">
-          <div className="flex gap-8">
+        <LiquidGlassCard className="p-5 sm:p-8 w-full max-w-2xl">
+          <div className="flex flex-col sm:flex-row gap-5 sm:gap-8">
             <LocationMap />
 
             <div>
-              <h3>Instituto Tecnológico de Saltillo</h3>
-              <p>Blvd. Venustiano Carranza...</p>
+              <h3 className="text-lg sm:text-xl font-semibold">Instituto Tecnológico de Saltillo</h3>
+              <p className="text-sm sm:text-base text-white/70">Blvd. Venustiano Carranza...</p>
             </div>
           </div>
         </LiquidGlassCard>
@@ -149,11 +148,11 @@ function App() {
           flex
           items-center
           justify-center
-          px-6
+          px-4 sm:px-6
           "
           >
-        <LiquidGlassCard className="p-8">
-          <h2 className="text-4x1 font-bold">
+        <LiquidGlassCard className="p-5 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             Requisitos
           </h2>
         </LiquidGlassCard>
@@ -167,11 +166,11 @@ function App() {
           flex
           items-center
           justify-center
-          px-6
+          px-4 sm:px-6
         "
       >
-        <LiquidGlassCard className="p-8">
-          <h2 className="text-4xl font-bold">
+        <LiquidGlassCard className="p-5 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             Preguntas frecuentes
           </h2>
         </LiquidGlassCard>

@@ -1,6 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { LiquidGlassCard } from "@/components-custom/GlassCard";
 
 export function Navbar() {
@@ -9,6 +17,7 @@ export function Navbar() {
 
   const [active, setActive] = useState("inicio");
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
+  const [menuOpen, setMenuOpen] = useState(false);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -64,12 +73,13 @@ export function Navbar() {
 
   return (
     <>
-      {/* Navbar centrado, independiente del botón */}
+      {/* ============ DESKTOP (md y más grande) ============ */}
+      {/* Navbar centrado con píldora deslizante */}
       <motion.header
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-6"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden w-full max-w-3xl px-6 md:block"
       >
         <LiquidGlassCard variant="nav" className="px-6 py-3">
           <nav className="flex items-center justify-between">
@@ -115,13 +125,12 @@ export function Navbar() {
         </LiquidGlassCard>
       </motion.header>
 
-      {/* Botón fijo en la esquina, totalmente independiente del navbar */}
-      {/* Botones fijos en la esquina, independientes del navbar */}
+      {/* Botones fijos en la esquina, solo en desktop */}
       <motion.div
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className="fixed top-6 right-6 z-50 flex items-center gap-3"
+        className="fixed top-4 right-6 z-50 hidden items-center gap-3 md:flex"
       >
         <Button
           variant="ghost"
@@ -137,6 +146,96 @@ export function Navbar() {
           Reglamento
         </Button>
       </motion.div>
+
+      {/* ============ MOBILE (debajo de md) ============ */}
+      {/* Barra compacta: logo + botón "Registrarme" + hamburguesa que abre el menú */}
+      <motion.header
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="fixed bottom-3 left-3 right-3 z-50 md:hidden"
+      >
+        <LiquidGlassCard variant="nav" className="px-4 py-2.5">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <img
+                src="/blanco_sin_fondo.png"
+                className="h-7 w-7 scale-150 object-contain"
+                alt="Logo"
+              />
+              <h1 className="text-sm font-bold text-white">Hackathon</h1>
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <Button
+                size="sm"
+                variant="ghost"
+                className="glass-liquid !rounded-full px-4 text-xs text-white hover:text-white hover:bg-white/10"
+              >
+                Registro
+              </Button>
+
+              <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="!rounded-full text-white hover:bg-white/10"
+                    aria-label="Abrir menú"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side="right"
+                  className="glass-nav w-[80vw] max-w-xs border-white/10 bg-transparent p-0"
+                >
+                  <SheetHeader className="border-b border-white/10 px-6 py-5">
+                    <SheetTitle className="text-white">Hackathon</SheetTitle>
+                  </SheetHeader>
+
+                  <nav className="flex flex-col gap-1 px-4 py-4">
+                    {links.map((link) => (
+                      <a
+                        key={link.id}
+                        href={`#${link.id}`}
+                        onClick={() => {
+                          setActive(link.id);
+                          setMenuOpen(false);
+                        }}
+                        className={`rounded-xl px-4 py-3 text-base transition-colors ${
+                          active === link.id
+                            ? "bg-white/10 text-white"
+                            : "text-white/70 hover:bg-white/5 hover:text-white"
+                        }`}
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </nav>
+
+                  <div className="mt-auto flex flex-col gap-2 border-t border-white/10 px-4 py-4">
+                    <Button
+                      variant="ghost"
+                      className="glass-liquid !rounded-full text-white hover:text-white hover:bg-white/10"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Registrarme
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="!rounded-full text-white/70 hover:text-white hover:bg-transparent underline underline-offset-4"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Reglamento
+                    </Button>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
+        </LiquidGlassCard>
+      </motion.header>
     </>
   );
 }
