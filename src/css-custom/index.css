@@ -49,6 +49,27 @@
     0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
+/* ==========================================================
+   Fallback para navegadores que NO soportan backdrop-filter
+   con url() (referencia a filtro SVG): Firefox y Safari.
+
+   Detectado en runtime por src/lib/glass-support.ts, que pone
+   <html data-glass="fallback"> cuando corresponde. Sin esto,
+   Firefox específicamente puede descartar TODA la lista de
+   backdrop-filter por considerar url() un valor inválido,
+   dejando el vidrio sin ningún blur. Aquí NO se toca ningún
+   color, background ni box-shadow — solo el backdrop-filter.
+   ========================================================== */
+[data-glass="fallback"] .glass-liquid {
+  backdrop-filter: blur(10px) saturate(150%) brightness(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(150%) brightness(1.1);
+}
+
+[data-glass="fallback"] .glass-nav {
+  backdrop-filter: blur(14px) saturate(160%) brightness(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(160%) brightness(1.05);
+}
+
 /* ===========================
    Aurora Background
    =========================== */
