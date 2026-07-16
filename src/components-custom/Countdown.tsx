@@ -29,7 +29,7 @@ function DigitBlock({ value, label }: { value: number; label: string }) {
 
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className="relative h-14 w-16 overflow-hidden sm:h-20 sm:w-24">
+      <div className="relative h-10 w-10 overflow-hidden sm:h-14 sm:w-16 md:h-20 md:w-24">
         <AnimatePresence mode="popLayout">
           <motion.span
             key={display}
@@ -37,13 +37,13 @@ function DigitBlock({ value, label }: { value: number; label: string }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -24, opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-white sm:text-5xl"
+            className="absolute inset-0 flex items-center justify-center text-xl font-bold text-white sm:text-3xl md:text-5xl"
           >
             {display}
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="text-xs uppercase tracking-widest text-white/60 sm:text-sm">
+      <span className="text-[10px] uppercase tracking-widest text-white/60 sm:text-xs md:text-sm">
         {label}
       </span>
     </div>
@@ -79,13 +79,13 @@ export function Countdown({ targetDate }: { targetDate: Date }) {
   }
 
   return (
-    <div className="flex items-center gap-3 sm:gap-6">
+    <div className="flex items-center gap-1.5 sm:gap-3 md:gap-6">
       <DigitBlock value={timeLeft.days} label="Días" />
-      <span className="pb-5 text-2xl font-bold text-white/40 sm:text-4xl">:</span>
+      <span className="pb-3 text-lg font-bold text-white/40 sm:pb-5 sm:text-2xl md:text-4xl">:</span>
       <DigitBlock value={timeLeft.hours} label="Horas" />
-      <span className="pb-5 text-2xl font-bold text-white/40 sm:text-4xl">:</span>
+      <span className="pb-3 text-lg font-bold text-white/40 sm:pb-5 sm:text-2xl md:text-4xl">:</span>
       <DigitBlock value={timeLeft.minutes} label="Min" />
-      <span className="pb-5 text-2xl font-bold text-white/40 sm:text-4xl">:</span>
+      <span className="pb-3 text-lg font-bold text-white/40 sm:pb-5 sm:text-2xl md:text-4xl">:</span>
       <DigitBlock value={timeLeft.seconds} label="Seg" />
     </div>
   );

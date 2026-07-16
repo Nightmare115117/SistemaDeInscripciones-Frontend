@@ -173,4 +173,27 @@ body::after {
       inset 0 1px 1px rgba(255, 255, 255, .2),
       0 8px 20px rgba(0, 0, 0, .3);
   }
+
+  /* El Aurora con blur(120px)/(100px) es muy pesado para GPUs de celular
+     (puede causar lag notable al hacer scroll en equipos de gama media/baja).
+     Bajamos el radio de blur y el área (inset) sin tocar ningún color. */
+  body::before {
+    inset: -15%;
+    filter: blur(60px);
+  }
+
+  body::after {
+    inset: -15%;
+    filter: blur(50px);
+  }
+}
+
+/* Respeta la preferencia de "reducir movimiento" del sistema operativo:
+   quienes la activan suelen tener sensibilidad a animaciones o buscan
+   ahorrar batería/rendimiento. No afecta a nadie más. */
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
 }
