@@ -39,30 +39,6 @@ function App() {
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <div
-        className="
-          absolute
-          -top-32
-          -left-32
-          h-200
-          w-110
-          rounded-full
-          bg-[#EBBE4D]/50
-          blur-3xl
-        "
-      />
-      <div
-        className="
-          absolute
-          -bottom-40
-          -right-40
-          h-150
-          w-200
-          rounded-full
-          bg-[rgb(0,0,128)]/40
-          blur-3xl
-        "
-      />
 
         <Navbar />
 
