@@ -11,6 +11,8 @@ function App() {
   const [selectedDay, setSelectedDay] = useState("dia1");
   const [total, setTotal] = useState(0);
 
+  //https://sistemadeinscripciones.onrender.com/
+
   useEffect(() => {
     fetch('https://sistemadeinscripciones.onrender.com/api/registro/count', {})
     .then((res) => res.json())
