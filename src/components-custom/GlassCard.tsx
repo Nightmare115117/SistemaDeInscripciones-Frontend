@@ -40,7 +40,7 @@ export function LiquidGlassCard({
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       className={cn(
         variant === "nav" ? "glass-nav" : "glass-liquid",
-        "relative isolate overflow-hidden rounded-[40px] p-6 transform-gpu",
+        "relative isolate overflow-hidden rounded-[40px] p-6",
         className
       )}
       style={style}
