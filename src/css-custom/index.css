@@ -174,6 +174,11 @@ body::after {
       0 8px 20px rgba(0, 0, 0, .3);
   }
 
+  .glass-liquid, .glass-nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
   /* El Aurora con blur(120px)/(100px) es muy pesado para GPUs de celular
      (puede causar lag notable al hacer scroll en equipos de gama media/baja).
      Bajamos el radio de blur y el área (inset) sin tocar ningún color. */
