@@ -55,7 +55,7 @@ function App() {
         "
       >
         <LiquidGlassCard className="p-5 sm:p-8 flex flex-col items-center gap-4 sm:gap-6 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#d3d3d3] md:text-black">
             Bienvenido
           </h1>
           <Countdown targetDate={new Date("2026-10-12T12:30:00")} />
