@@ -156,42 +156,33 @@ body::after {
 }
 
 @media (max-width: 768px) {
-  .glass-liquid {
-    background: var(--glass-bg, rgba(255, 255, 255, 0.08));
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, .25),
-      0 8px 20px rgba(0, 0, 0, .2);
-  }
-
+  .glass-liquid,
   .glass-nav {
-    background: var(--glass-bg, rgba(20, 20, 25, 0.78));
-    backdrop-filter: blur(8px) saturate(150%);
-    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    background: rgba(18, 18, 24, 0.68);
+    border-color: rgba(255, 255, 255, 0.14);
     box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, .2),
-      0 8px 20px rgba(0, 0, 0, .3);
+      inset 0 1px 1px rgba(255, 255, 255, 0.14),
+      0 10px 24px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(9px) saturate(1.1);
+    -webkit-backdrop-filter: blur(9px) saturate(1.1);
   }
 
-  .glass-liquid, .glass-nav {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
+  body::before,
+  body::after {
+    animation: none;
+  }
 
-  /* El Aurora con blur(120px)/(100px) es muy pesado para GPUs de celular
-     (puede causar lag notable al hacer scroll en equipos de gama media/baja).
-     Bajamos el radio de blur y el área (inset) sin tocar ningún color. */
   body::before {
-    inset: -15%;
-    filter: blur(30px);
+    inset: -10%;
+    filter: blur(20px);
   }
 
   body::after {
-    inset: -15%;
-    filter: blur(10px);
+    inset: -10%;
+    filter: blur(8px);
   }
 }
+
 
 /* Respeta la preferencia de "reducir movimiento" del sistema operativo:
    quienes la activan suelen tener sensibilidad a animaciones o buscan
