@@ -188,7 +188,7 @@ export function Navbar() {
                 </SheetTrigger>
                 <SheetContent
                   side="right"
-                  className="glass-nav w-[80vw] max-w-xs border-white/10 bg-transparent p-0"
+                  className="bg-zinc-900"
                 >
                   <SheetHeader className="border-b border-white/10 px-6 py-5">
                     <SheetTitle className="text-white">Hackathon</SheetTitle>
