@@ -1,4 +1,19 @@
+import { useEffect, useState } from "react";
+
 export function LiquidGlassFilter() {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setEnabled(media.matches);
+
+    const handleChange = () => setEnabled(media.matches);
+    media.addEventListener("change", handleChange);
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
+
+  if (!enabled) return null;
+
   return (
     <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
       <filter id="lg-filter" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
