@@ -23,7 +23,7 @@ export function isChromiumBrowser(): boolean {
 
   if (uaData?.brands) {
     return uaData.brands.some((b) =>
-      /Chromium|Google Chrome|Microsoft Edge/i.test(b.brand)
+      /Chrom(?:e|ium)|Google Chrome|Microsoft Edge|Brave|Opera/i.test(b.brand)
     );
   }
 
@@ -31,9 +31,10 @@ export function isChromiumBrowser(): boolean {
   // userAgentData, así que siempre caen aquí).
   const ua = navigator.userAgent;
   const isFirefox = /Firefox/i.test(ua);
-  const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
+  const isSafari = /Safari/i.test(ua) && !/Chrome|Chromium|CriOS|CrMo|OPR|Edg|Brave/i.test(ua);
+  const isChromium = /Chrome|Chromium|CriOS|CrMo|OPR|Edg|Brave/i.test(ua);
 
-  return !isFirefox && !isSafari;
+  return isChromium && !isFirefox && !isSafari;
 }
 
 /**
