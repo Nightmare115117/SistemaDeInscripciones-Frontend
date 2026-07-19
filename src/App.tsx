@@ -131,11 +131,13 @@ function App() {
           px-4 sm:px-6
         "
       >
-        <LiquidGlassCard className="p-5 sm:p-8 w-full max-w-2xl">
-          <div className="flex flex-col sm:flex-row gap-5 sm:gap-8">
-            <LocationMap />
+        <LiquidGlassCard className="p-5 sm:p-8 w-full max-w-5xl">
+          <div className="flex flex-col md:flex-row gap-5 md:gap-8">
+            <div className="flex-1 min-w-0 min-h-[560px]">
+              <LocationMap />
+            </div>
 
-            <div>
+            <div className="md:w-[360px] flex flex-col items-center justify-center text-center">
               <h3 className="text-lg sm:text-xl font-semibold">Instituto Tecnológico de Saltillo</h3>
               <p className="text-sm sm:text-base text-white/70">Blvd. Venustiano Carranza...</p>
             </div>

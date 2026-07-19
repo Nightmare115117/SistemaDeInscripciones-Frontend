@@ -130,7 +130,7 @@ export function Navbar() {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className="fixed top-4 right-6 z-50 hidden items-center gap-3 md:flex"
+        className="hidden"
       >
         <Button
           variant="ghost"
@@ -147,9 +147,9 @@ export function Navbar() {
         </Button>
       </motion.div>
 
-      {/* ============ MOBILE (debajo de md) ============ */}
+      {/* ============ MOBILE (sólo móvil) ============ */}
       {/* Barra compacta: logo + botón "Registrarme" + hamburguesa que abre el menú */}
-      <header className="fixed bottom-3 left-3 right-3 z-50 md:hidden">
+      <header className="fixed bottom-3 left-1/2 z-50 w-[min(92vw,420px)] -translate-x-1/2 md:hidden">
         <LiquidGlassCard variant="nav" className="px-4 py-2.5">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
@@ -158,7 +158,7 @@ export function Navbar() {
                 className="h-7 w-7 scale-150 object-contain"
                 alt="Logo"
               />
-              <h1 className="text-sm font-bold text-white">Hackathon</h1>
+              <h1 className="text-sm font-bold text-white">Hackathon</h1> 
             </div>
 
             <div className="flex items-center gap-1.5">
