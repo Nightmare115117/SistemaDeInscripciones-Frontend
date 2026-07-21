@@ -1,11 +1,12 @@
 import { LiquidGlassCard } from "@/components-custom/GlassCard";
 import { AnimatePresence, motion } from "motion/react";
-import { Countdown } from "./components-custom/Countdown";
+import { Countdown } from "../components-custom/Countdown";
 import { useEffect, useState } from "react";
-import { LocationMap } from "./components-custom/InteractiveMap";
-import { Navbar } from "./components-custom/Navbar";
+import { LocationMap } from "../components-custom/InteractiveMap";
+import { Navbar } from "../components-custom/Navbar";
 import "@/css-custom/App.css"
-import { SegmentedControl } from "./components-custom/SegmentOption";
+import { SegmentedControl } from "../components-custom/SegmentOption";
+import Acordeon from "../components-custom/Panel";
 
 function App() {
   const [selectedDay, setSelectedDay] = useState("dia1");
@@ -174,9 +175,23 @@ function App() {
         "
       >
         <LiquidGlassCard className="p-5 sm:p-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-            Preguntas frecuentes
-          </h2>
+          <div className="flex flex-col gap-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              Preguntas frecuentes
+            </h2>
+
+            <Acordeon
+              items={[
+                { titulo: "¿Qué es el Hackathon?", contenido: "Un hackatón es un evento de innovación donde equipos de personas con distintas habilidades crean soluciones y prototipos para resolver retos específicos en un tiempo limitado, demostrando creatividad, colaboración y capacidad técnica." },
+                { titulo: "¿Cómo me registro?", contenido: "Dando click en el boton de registro, y llena el formulario que aparece" },
+                { titulo: "¿Necesito saber programar para participar?", contenido: "No necesariamente. Los equipos pueden incluir personas con habilidades de diseño, administración, investigación, comunicación, negocios u otras áreas." },
+                { titulo: "¿Puedo participar de manera individual?", contenido: "No, necesitas un equipo" },
+                { titulo: "¿Cuántas personas pueden formar un equipo?", contenido: "Minimo de 3 integrantes, maximo de 5" },
+                { titulo: "¿Cuánto tiempo dura el hackatón?", contenido: "" }
+              ]}
+              permitirVariosAbiertos={false}
+            />
+          </div>
         </LiquidGlassCard>
       </section>
     </main>
