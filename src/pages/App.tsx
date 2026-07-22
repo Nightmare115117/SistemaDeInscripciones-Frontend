@@ -233,7 +233,7 @@ function App() {
               text-center
             "
           >
-            Patrocinadores
+            Nuestros Patrocinadores
           </h2>
 
 
