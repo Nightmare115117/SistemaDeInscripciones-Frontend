@@ -194,6 +194,121 @@ function App() {
           </div>
         </LiquidGlassCard>
       </section>
+
+      <section
+        id="Patrocinadores"
+        className="
+          min-h-screen
+          flex
+          items-center
+          justify-center
+          px-4 sm:px-6
+        "
+      >
+        <div
+          className="
+            w-full
+            max-w-5xl
+            min-h-[70vh]
+            rounded-3xl
+            bg-gray-200/20
+            backdrop-blur-xl
+            border border-white/20
+            shadow-2xl
+            p-8 sm:p-12
+            flex
+            flex-col
+            items-center
+            justify-center
+            gap-10
+          "
+        >
+
+          <h2
+            className="
+              text-3xl
+              sm:text-4xl
+              md:text-5xl
+              font-bold
+              text-center
+            "
+          >
+            Patrocinadores
+          </h2>
+
+
+          <div
+            className="
+              w-full
+              grid
+              grid-cols-2
+              sm:grid-cols-3
+              gap-10
+              items-center
+              justify-items-center
+            "
+          >
+
+            <div className="flex justify-center">
+              <img
+                src="./patrocinadores/Edit2.png"
+                alt="Instituto Municipal de la Juventud"
+                className="
+                  w-40
+                  sm:w-48
+                  h-auto
+                  object-contain
+                  brightness-0
+                  invert
+                  opacity-80
+                  hover:opacity-100
+                  transition
+                "
+              />
+            </div>
+
+
+            <div className="flex justify-center">
+              <img
+                src="./patrocinadores/logo2.png"
+                alt="Patrocinador"
+                className="
+                  w-40
+                  sm:w-48
+                  h-auto
+                  object-contain
+                  brightness-0
+                  invert
+                  opacity-80
+                  hover:opacity-100
+                  transition
+                "
+              />
+            </div>
+
+
+            <div className="flex justify-center">
+              <img
+                src="./patrocinadores/logo3.png"
+                alt="Patrocinador"
+                className="
+                  w-40
+                  sm:w-48
+                  h-auto
+                  object-contain
+                  brightness-0
+                  invert
+                  opacity-80
+                  hover:opacity-100
+                  transition
+                "
+              />
+            </div>
+
+          </div>
+
+        </div>
+      </section>
     </main>
   );
 }
