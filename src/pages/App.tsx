@@ -251,7 +251,7 @@ function App() {
 
             <div className="flex justify-center">
               <img
-                src="./patrocinadores/Edit2.png"
+                src="./patrocinadores/Edit2.svg"
                 alt="Instituto Municipal de la Juventud"
                 className="
                   w-40
