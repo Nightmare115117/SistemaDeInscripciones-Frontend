@@ -96,7 +96,7 @@ export function Countdown({ targetDate }: { targetDate: Date }) {
   }
 
   return (
-    <div className="flex items-center gap-1.5 sm:gap-3 md:gap-6">
+    <div className="flex items-center gap-1.5 sm:gap-3 md:gap-6 mb-3">
       <DigitBlock value={timeLeft.days} label="Días" animate={shouldAnimate} />
       <span className="pb-3 text-lg font-bold text-white/40 sm:pb-5 sm:text-2xl md:text-4xl">:</span>
       <DigitBlock value={timeLeft.hours} label="Horas" animate={shouldAnimate} />
