@@ -56,10 +56,15 @@ function App() {
         "
       >
         <LiquidGlassCard className="p-5 sm:p-8 flex flex-col items-center gap-4 sm:gap-6 text-center">
+          <img src="ROAD.svg" className="w-32 h-auto mx-auto invert"></img>
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#d3d3d3] md:text-black">
             Bienvenido
           </h1>
+          <h2 className="text-sm sm:text-base text-white/70">HACKATHON TCNM 2026</h2>
+          <h3 className="text-sm sm:text-base text-white/70">1mera Edición</h3>
+          <h4 className="text-sm sm:text-base text-white/70">24 horas de Inovación, tecnologia y trabajo en equipo</h4>
           <Countdown targetDate={new Date("2026-10-12T12:30:00")} />
+          <p></p>
           <h2 className="text-sm sm:text-base text-white/70">{47 - total} lugares disponibles</h2>
         </LiquidGlassCard>
       </section>

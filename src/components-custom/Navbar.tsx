@@ -20,6 +20,9 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const containerRef = useRef<HTMLDivElement>(null);
+  const abrirPDF = () => {
+    window.open("/Documents/REGLAMENTO.pdf", "_blank");
+  };
 
   const links = [
     { id: "inicio", label: "Inicio" },
@@ -142,6 +145,7 @@ export function Navbar() {
         <Button
           variant="ghost"
           className="!rounded-full px-4 text-white/70 hover:text-white hover:bg-transparent underline underline-offset-4"
+          onClick={abrirPDF}
         >
           Reglamento
         </Button>
