@@ -12,10 +12,10 @@ function App() {
   const [selectedDay, setSelectedDay] = useState("dia1");
   const [total, setTotal] = useState(0);
 
-  //https://sistemadeinscripciones.onrender.com/
+  //https://mi-api-latest-4szb.onrender.com/
 
   useEffect(() => {
-    fetch('https://sistemadeinscripciones.onrender.com/api/registro/count', {})
+    fetch('https://mi-api-latest-4szb.onrender.com/api/registro/count', {})
     .then((res) => res.json())
     .then((data) => setTotal(data.total))
     .catch((err) => console.error(err));
