@@ -89,11 +89,12 @@ export function Navbar() {
           -translate-x-1/2
           z-50
           hidden
-          w-[calc(100vw-2rem)]
-          max-w-3xl
-          px-6
           lg:block
-        ">
+          w-[calc(100vw-24rem)]
+          max-w-3xl
+          min-w-fit
+        "
+      >
         <LiquidGlassCard variant="nav" className="px-6 py-3" >
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-3">
