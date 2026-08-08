@@ -82,7 +82,7 @@ export function Navbar() {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden w-full max-w-3xl px-6 md:block"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden w-full max-w-3xl px-6 lg:block"
       >
         <LiquidGlassCard variant="nav" className="px-6 py-3" >
           <nav className="flex items-center justify-between">
@@ -133,7 +133,7 @@ export function Navbar() {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className="fixed top-4 right-6 z-50 hidden md:flex items-center gap-3"
+        className="fixed top-4 right-6 z-50 hidden lg:flex items-center gap-3"
       >
         <Button
           variant="ghost"
@@ -153,7 +153,7 @@ export function Navbar() {
 
       {/* ============ MOBILE (sólo móvil) ============ */}
       {/* Barra compacta: logo + botón "Registrarme" + hamburguesa que abre el menú */}
-      <header className="fixed bottom-3 left-1/2 z-50 w-[min(92vw,420px)] -translate-x-1/2 md:hidden">
+      <header className="fixed bottom-3 left-1/2 z-50 w-[min(92vw,420px)] -translate-x-1/2 lg:hidden">
         <LiquidGlassCard variant="nav" className="px-4 py-2.5">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
