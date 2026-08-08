@@ -237,7 +237,11 @@ body::after {
   }
 }
 
-@media (min-width: 768px) {
+/* ==========================================================
+   Desktop
+   ========================================================== */
+
+@media (min-width: 1025px) {
   body {
     display: flex;
     justify-content: center;
