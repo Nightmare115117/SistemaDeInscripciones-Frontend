@@ -82,8 +82,18 @@ export function Navbar() {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden w-full max-w-3xl px-6 lg:block"
-      >
+        className="
+          fixed
+          top-4
+          left-1/2
+          -translate-x-1/2
+          z-50
+          hidden
+          w-[calc(100vw-2rem)]
+          max-w-3xl
+          px-6
+          lg:block
+        ">
         <LiquidGlassCard variant="nav" className="px-6 py-3" >
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -254,7 +264,7 @@ export function Navbar() {
                       <Button
                         variant="ghost"
                         className="!rounded-full text-white/70 hover:text-white hover:bg-transparent underline underline-offset-4"
-                        onClick={() => {setMenuOpen(false), abrirPDF}}
+                        onClick={() => {setMenuOpen(false); abrirPDF();}}
                       >
                         Reglamento
                       </Button>
