@@ -153,7 +153,7 @@ export function Navbar() {
 
       {/* ============ MOBILE (sólo móvil) ============ */}
       {/* Barra compacta: logo + botón "Registrarme" + hamburguesa que abre el menú */}
-      <header className="fixed bottom-3 left-1/2 z-50 w-[min(92vw,420px)] -translate-x-1/2 lg:hidden">
+      <header className="fixed bottom-3 left-1/2 z-50 w-[min(92vw,420px)] -translate-x-1/2 min-[1025px]:hidden">
         <LiquidGlassCard variant="nav" className="px-4 py-2.5">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
@@ -254,7 +254,7 @@ export function Navbar() {
                       <Button
                         variant="ghost"
                         className="!rounded-full text-white/70 hover:text-white hover:bg-transparent underline underline-offset-4"
-                        onClick={() => setMenuOpen(false)}
+                        onClick={() => {setMenuOpen(false), abrirPDF}}
                       >
                         Reglamento
                       </Button>
