@@ -90,9 +90,7 @@ export function Navbar() {
           z-50
           hidden
           lg:block
-          w-[calc(100vw-24rem)]
-          max-w-3xl
-          min-w-fit
+          w-fit
         "
       >
         <LiquidGlassCard variant="nav" className="px-6 py-3" >
