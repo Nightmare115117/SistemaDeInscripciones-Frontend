@@ -198,7 +198,7 @@ body::after {
   isolation: isolate;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 769px) and (max-width: 1024px) and (pointer: coarse) {
   .glass-liquid,
   .glass-nav {
     background: rgba(18, 18, 24, 0.68);
