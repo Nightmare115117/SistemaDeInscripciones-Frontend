@@ -27,7 +27,6 @@ export function Navbar() {
   const links = [
     { id: "inicio", label: "Inicio" },
     { id: "itinerario", label: "Itinerario" },
-    { id: "ubicacion", label: "Ubicación" },
     { id: "requisitos", label: "Requisitos" },
     { id: "faq", label: "FAQ" },
   ];
