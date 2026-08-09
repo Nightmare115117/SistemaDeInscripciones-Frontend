@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 // TODO: confirmar con el backend (Crow/PostgreSQL) el endpoint real y el
 // shape exacto del body que espera. Se asume, por analogía con
@@ -11,6 +12,7 @@ const MIN_INTEGRANTES = 3;
 const MAX_INTEGRANTES = 5;
 
 interface Integrante {
+  id: string;
   nombre: string;
   correo: string;
 }
@@ -23,8 +25,20 @@ const inputClass =
 const labelClass =
   "text-xs font-medium text-white/60 uppercase tracking-wide";
 
+// Cada integrante necesita un id propio (no basta el índice del arreglo):
+// al quitar uno de en medio, todos los índices posteriores se recorren,
+// y AnimatePresence usa la key para saber qué elemento entra/sale. Con
+// índice como key, la animación de salida se le "pega" a la fila
+// equivocada cuando el array se reacomoda.
 function crearIntegranteVacio(): Integrante {
-  return { nombre: "", correo: "" };
+  return {
+    id:
+      typeof crypto !== "undefined" && crypto.randomUUID
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random()}`,
+    nombre: "",
+    correo: "",
+  };
 }
 
 export function RegistroForm() {
@@ -40,12 +54,12 @@ export function RegistroForm() {
   const [errorMsg, setErrorMsg] = useState("");
 
   const actualizarIntegrante = (
-    index: number,
-    campo: keyof Integrante,
+    id: string,
+    campo: keyof Omit<Integrante, "id">,
     valor: string
   ) => {
     setIntegrantes((prev) =>
-      prev.map((it, i) => (i === index ? { ...it, [campo]: valor } : it))
+      prev.map((it) => (it.id === id ? { ...it, [campo]: valor } : it))
     );
   };
 
@@ -54,9 +68,9 @@ export function RegistroForm() {
     setIntegrantes((prev) => [...prev, crearIntegranteVacio()]);
   };
 
-  const quitarIntegrante = (index: number) => {
+  const quitarIntegrante = (id: string) => {
     if (integrantes.length <= MIN_INTEGRANTES) return;
-    setIntegrantes((prev) => prev.filter((_, i) => i !== index));
+    setIntegrantes((prev) => prev.filter((it) => it.id !== id));
   };
 
   const validar = (): string | null => {
@@ -93,7 +107,12 @@ export function RegistroForm() {
         body: JSON.stringify({
           equipo,
           contacto: { correo: correoContacto, telefono },
-          integrantes,
+          // el id es solo para manejo local (animaciones/keys); no forma
+          // parte del contrato con el backend
+          integrantes: integrantes.map(({ nombre, correo }) => ({
+            nombre,
+            correo,
+          })),
         }),
       });
 
@@ -178,38 +197,45 @@ export function RegistroForm() {
         </div>
 
         <div className="flex flex-col gap-3">
-          {integrantes.map((it, i) => (
-            <div
-              key={i}
-              className="flex flex-col sm:flex-row gap-2 rounded-2xl bg-white/5 border border-white/10 p-3"
-            >
-              <input
-                className={inputClass}
-                value={it.nombre}
-                onChange={(e) =>
-                  actualizarIntegrante(i, "nombre", e.target.value)
-                }
-                placeholder={`Nombre integrante ${i + 1}`}
-              />
-              <input
-                type="email"
-                className={inputClass}
-                value={it.correo}
-                onChange={(e) =>
-                  actualizarIntegrante(i, "correo", e.target.value)
-                }
-                placeholder="correo@ejemplo.com"
-              />
-              <button
-                type="button"
-                onClick={() => quitarIntegrante(i)}
-                disabled={integrantes.length <= MIN_INTEGRANTES}
-                className="shrink-0 rounded-xl border border-white/10 px-3 py-2.5 text-xs text-white/50 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-transparent"
+          <AnimatePresence initial={false}>
+            {integrantes.map((it, i) => (
+              <motion.div
+                key={it.id}
+                layout
+                initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 24, scale: 0.96 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="flex flex-col sm:flex-row gap-2 rounded-2xl bg-white/5 border border-white/10 p-3"
               >
-                Quitar
-              </button>
-            </div>
-          ))}
+                <input
+                  className={inputClass}
+                  value={it.nombre}
+                  onChange={(e) =>
+                    actualizarIntegrante(it.id, "nombre", e.target.value)
+                  }
+                  placeholder={`Nombre integrante ${i + 1}`}
+                />
+                <input
+                  type="email"
+                  className={inputClass}
+                  value={it.correo}
+                  onChange={(e) =>
+                    actualizarIntegrante(it.id, "correo", e.target.value)
+                  }
+                  placeholder="correo@ejemplo.com"
+                />
+                <button
+                  type="button"
+                  onClick={() => quitarIntegrante(it.id)}
+                  disabled={integrantes.length <= MIN_INTEGRANTES}
+                  className="shrink-0 rounded-xl border border-white/10 px-3 py-2.5 text-xs text-white/50 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-transparent"
+                >
+                  Quitar
+                </button>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
         <button
