@@ -259,7 +259,7 @@ export function Navbar() {
                         className="glass-liquid !rounded-full text-white hover:text-white hover:bg-white/10"
                         onClick={() => setMenuOpen(false)}
                       >
-                        <Link to="/registro">Registrarme</Link>
+                        <Link to="@/pages/Registro">Registrarme</Link>
                       </Button>
 
                       <Button

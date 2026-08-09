@@ -7,6 +7,8 @@ import { Navbar } from "../components-custom/Navbar";
 import "@/css-custom/App.css"
 import { SegmentedControl } from "../components-custom/SegmentOption";
 import Acordeon from "../components-custom/Panel";
+import { Routes, Route } from "react-router-dom";
+import { RegistroForm } from "./Registro";
 
 // Acento de marca: cian eléctrico, usado con moderación en eyebrows,
 // bordes activos y detalles — coherente con el tema "tech" del evento.
@@ -52,6 +54,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
     </span>
   );
 }
+
 
 function Reveal({
   children,
@@ -234,7 +237,7 @@ const FaqSection = memo(function FaqSection() {
   );
 });
 
-function App() {
+function HomePage() {
   const [selectedDay, setSelectedDay] = useState("dia1");
   const [total, setTotal] = useState(0);
 
@@ -658,6 +661,15 @@ function App() {
         </Reveal>
       </section>
     </main>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/registro" element={<RegistroForm />} />
+    </Routes>
   );
 }
 
