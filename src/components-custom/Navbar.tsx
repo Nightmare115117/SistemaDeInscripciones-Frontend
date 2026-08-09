@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { LiquidGlassCard } from "@/components-custom/GlassCard";
+import { Link } from "react-router-dom";
 
 export function Navbar() {
   const navLink =
@@ -144,10 +145,11 @@ export function Navbar() {
         className="fixed top-4 right-6 z-50 hidden lg:flex items-center gap-3"
       >
         <Button
+          asChild
           variant="ghost"
           className="glass-liquid !rounded-full px-6 py-5 text-white hover:text-white hover:bg-white/10"
         >
-          Registrarme
+          <Link to="/registro">Registrarme</Link>
         </Button>
 
         <Button
@@ -252,11 +254,12 @@ export function Navbar() {
                       className="mt-auto flex flex-col gap-2 border-t border-white/10 px-4 py-4"
                     >
                       <Button
+                        asChild
                         variant="ghost"
                         className="glass-liquid !rounded-full text-white hover:text-white hover:bg-white/10"
                         onClick={() => setMenuOpen(false)}
                       >
-                        Registrarme
+                        <Link to="/registro">Registrarme</Link>
                       </Button>
 
                       <Button

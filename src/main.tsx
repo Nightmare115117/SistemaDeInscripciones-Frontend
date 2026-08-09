@@ -6,6 +6,7 @@ import { LiquidGlassFilter } from '@/components-custom/liquid-glass-filter'
 import App from "./pages/App";
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
+import { BrowserRouter } from "react-router-dom";
 
 applyGlassSupportAttribute();
 
