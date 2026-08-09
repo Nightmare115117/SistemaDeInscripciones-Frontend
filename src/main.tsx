@@ -14,7 +14,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <TooltipProvider>
       <LiquidGlassFilter />
-      <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       <Toaster />
     </TooltipProvider>
   </StrictMode>,
