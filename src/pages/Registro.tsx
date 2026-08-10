@@ -47,9 +47,8 @@ function crearIntegranteVacio(): Integrante {
 
 export function RegistroForm() {
   const [equipo, setEquipo] = useState("");
-  const [correoContacto, setCorreoContacto] = useState("");
-  const [telefonoContacto, setTelefonoContacto] = useState("");
   const [problematica, setProblematica] = useState("");
+  const [liderId, setLiderId] = useState("");
 
   const [aceptaReglas, setAceptaReglas] = useState(false);
 
@@ -102,69 +101,80 @@ export function RegistroForm() {
   const agregarIntegrante = () => {
     if (integrantes.length >= MAX_INTEGRANTES) return;
 
-    setIntegrantes((prev) => [
-      ...prev,
-      crearIntegranteVacio(),
-    ]);
+    setIntegrantes((prev) => [...prev, crearIntegranteVacio()]);
   };
 
   const quitarIntegrante = (id: string) => {
     if (integrantes.length <= MIN_INTEGRANTES) return;
 
-    setIntegrantes((prev) =>
-      prev.filter((it) => it.id !== id)
-    );
+    if (liderId === id) {
+      setLiderId("");
+    }
+
+    setIntegrantes((prev) => prev.filter((it) => it.id !== id));
   };
 
   const validar = (): string | null => {
-    if (!equipo.trim())
+    if (!equipo.trim()) {
       return "Ponle un nombre a tu equipo.";
+    }
 
-    if (!problematica.trim())
+    if (!problematica.trim()) {
       return "Selecciona una problemática.";
+    }
 
-    if (!correoContacto.trim())
-      return "Ingresa un correo de contacto.";
+    if (!liderId) {
+      return "Selecciona al líder del equipo.";
+    }
 
-    if (!/^\S+@\S+\.\S+$/.test(correoContacto))
-      return "El correo de contacto no es válido.";
+    const liderExiste = integrantes.some(
+      (integrante) => integrante.id === liderId
+    );
 
-    if (!telefonoContacto.trim())
-      return "Ingresa un teléfono de contacto.";
+    if (!liderExiste) {
+      return "El líder seleccionado ya no pertenece al equipo.";
+    }
 
     for (let i = 0; i < integrantes.length; i++) {
       const it = integrantes[i];
 
-      if (!it.nombre.trim())
+      if (!it.nombre.trim()) {
         return `Falta el nombre del integrante ${i + 1}.`;
+      }
 
       if (
         !it.correo.trim() ||
         !/^\S+@\S+\.\S+$/.test(it.correo)
-      )
+      ) {
         return `El correo del integrante ${i + 1} no es válido.`;
+      }
 
-      if (!it.telefono.trim())
+      if (!it.telefono.trim()) {
         return `Falta el teléfono del integrante ${i + 1}.`;
+      }
 
-      if (!it.emergencia.nombre.trim())
+      if (!it.emergencia.nombre.trim()) {
         return `Falta el contacto de emergencia del integrante ${
           i + 1
         }.`;
+      }
 
-      if (!it.emergencia.telefono.trim())
+      if (!it.emergencia.telefono.trim()) {
         return `Falta el teléfono de emergencia del integrante ${
           i + 1
         }.`;
+      }
 
-      if (!it.emergencia.parentesco.trim())
+      if (!it.emergencia.parentesco.trim()) {
         return `Falta el parentesco del contacto de emergencia del integrante ${
           i + 1
         }.`;
+      }
     }
 
-    if (!aceptaReglas)
+    if (!aceptaReglas) {
       return "Debes leer y aceptar las reglas para poder registrarte.";
+    }
 
     return null;
   };
@@ -189,10 +199,7 @@ export function RegistroForm() {
      * const payload = {
      *   equipo,
      *   problematica,
-     *   contacto: {
-     *     correo: correoContacto,
-     *     telefono: telefonoContacto,
-     *   },
+     *   liderId,
      *   integrantes,
      *   aceptaReglas,
      * };
@@ -213,31 +220,39 @@ export function RegistroForm() {
   };
 
   const abrirReglamento = () => {
-    window.open(
-      "/Documents/REGLAMENTO.pdf",
-      "_blank"
-    );
+    window.open("/Documents/REGLAMENTO.pdf", "_blank");
   };
 
-  /* ============================================================
-     ÉXITO
-     ============================================================ */
+  /*
+   * ============================================================
+   * ÉXITO
+   * ============================================================
+   */
 
   if (status === "exito") {
+    const lider = integrantes.find(
+      (integrante) => integrante.id === liderId
+    );
+
     return (
-      <div className="mx-auto flex w-full max-w-xl flex-col items-center justify-center gap-3 rounded-3xl border border-white/10 bg-white/5 p-8 text-center">
-        <span className="text-4xl">🎉</span>
+      <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+        <div className="text-4xl">🎉</div>
 
         <h2 className="text-xl font-semibold text-white">
           ¡Registro recibido!
         </h2>
 
-        <p className="text-sm leading-6 text-white/60">
-          Te contactaremos al correo{" "}
-          <span className="text-white">
-            {correoContacto}
-          </span>{" "}
-          con los siguientes pasos.
+        <p className="max-w-md text-sm leading-6 text-white/60">
+          El equipo{" "}
+          <span className="text-white">{equipo}</span>{" "}
+          ha sido registrado correctamente.
+          {lider?.correo && (
+            <>
+              {" "}
+              El líder recibirá la información correspondiente en{" "}
+              <span className="text-white">{lider.correo}</span>.
+            </>
+          )}
         </p>
       </div>
     );
@@ -246,9 +261,7 @@ export function RegistroForm() {
   return (
     <>
       {/* ==========================================================
-          ==========================================================
           DESKTOP
-          ==========================================================
           ========================================================== */}
 
       <div className="hidden lg:block">
@@ -270,6 +283,8 @@ export function RegistroForm() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
+              {/* NOMBRE */}
+
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>
                   Nombre del equipo
@@ -278,12 +293,12 @@ export function RegistroForm() {
                 <input
                   className={inputClass}
                   value={equipo}
-                  onChange={(e) =>
-                    setEquipo(e.target.value)
-                  }
+                  onChange={(e) => setEquipo(e.target.value)}
                   placeholder="Los Debuggers"
                 />
               </div>
+
+              {/* PROBLEMÁTICA */}
 
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>
@@ -297,17 +312,11 @@ export function RegistroForm() {
                   }
                   className={`${inputClass} cursor-pointer`}
                 >
-                  <option
-                    value=""
-                    className="bg-zinc-900"
-                  >
+                  <option value="" className="bg-zinc-900">
                     Selecciona una problemática
                   </option>
 
-                  <option
-                    value="agua"
-                    className="bg-zinc-900"
-                  >
+                  <option value="agua" className="bg-zinc-900">
                     Agua
                   </option>
 
@@ -327,36 +336,44 @@ export function RegistroForm() {
                 </select>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label className={labelClass}>
-                  Teléfono de contacto
-                </label>
+              {/* LÍDER CENTRADO */}
 
-                <input
-                  type="tel"
-                  className={inputClass}
-                  value={telefonoContacto}
-                  onChange={(e) =>
-                    setTelefonoContacto(e.target.value)
-                  }
-                  placeholder="844 123 4567"
-                />
-              </div>
+              <div className="col-span-2 flex justify-center">
+                <div className="flex w-full max-w-md flex-col gap-1.5">
+                  <label className={labelClass}>
+                    Líder del equipo
+                  </label>
 
-              <div className="flex flex-col gap-1.5">
-                <label className={labelClass}>
-                  Correo de contacto
-                </label>
+                  <select
+                    value={liderId}
+                    onChange={(e) =>
+                      setLiderId(e.target.value)
+                    }
+                    className={`${inputClass} cursor-pointer`}
+                  >
+                    <option
+                      value=""
+                      className="bg-zinc-900"
+                    >
+                      Selecciona al líder
+                    </option>
 
-                <input
-                  type="email"
-                  className={inputClass}
-                  value={correoContacto}
-                  onChange={(e) =>
-                    setCorreoContacto(e.target.value)
-                  }
-                  placeholder="equipo@correo.com"
-                />
+                    {integrantes.map((it, i) => (
+                      <option
+                        key={it.id}
+                        value={it.id}
+                        className="bg-zinc-900"
+                      >
+                        {it.nombre.trim() ||
+                          `Integrante ${i + 1}`}
+                      </option>
+                    ))}
+                  </select>
+
+                  <p className="text-center text-[11px] text-white/30">
+                    El líder debe ser uno de los integrantes.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
@@ -407,11 +424,21 @@ export function RegistroForm() {
                     }}
                     className="flex flex-col gap-5 rounded-2xl border border-white/10 bg-white/5 p-5"
                   >
+                    {/* HEADER */}
+
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-sm font-semibold text-white">
-                          Integrante {i + 1}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-semibold text-white">
+                            Integrante {i + 1}
+                          </span>
+
+                          {liderId === it.id && (
+                            <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-2 py-0.5 text-[10px] font-medium text-cyan-300">
+                              Líder
+                            </span>
+                          )}
+                        </div>
 
                         <p className="mt-0.5 text-xs text-white/30">
                           Información personal
@@ -432,6 +459,8 @@ export function RegistroForm() {
                         Quitar
                       </button>
                     </div>
+
+                    {/* DATOS */}
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="flex flex-col gap-1.5">
@@ -518,6 +547,8 @@ export function RegistroForm() {
 
                     <div className="h-px bg-white/5" />
 
+                    {/* EMERGENCIA */}
+
                     <div className="flex flex-col gap-3">
                       <div>
                         <p className="text-xs font-semibold uppercase tracking-wide text-white/60">
@@ -537,9 +568,7 @@ export function RegistroForm() {
 
                           <input
                             className={inputClass}
-                            value={
-                              it.emergencia.nombre
-                            }
+                            value={it.emergencia.nombre}
                             onChange={(e) =>
                               actualizarEmergencia(
                                 it.id,
@@ -559,9 +588,7 @@ export function RegistroForm() {
                           <input
                             type="tel"
                             className={inputClass}
-                            value={
-                              it.emergencia.telefono
-                            }
+                            value={it.emergencia.telefono}
                             onChange={(e) =>
                               actualizarEmergencia(
                                 it.id,
@@ -580,9 +607,7 @@ export function RegistroForm() {
 
                           <input
                             className={inputClass}
-                            value={
-                              it.emergencia.parentesco
-                            }
+                            value={it.emergencia.parentesco}
                             onChange={(e) =>
                               actualizarEmergencia(
                                 it.id,
@@ -640,11 +665,25 @@ export function RegistroForm() {
             </span>
           </label>
 
+          {/* ERROR */}
+
           {status === "error" && errorMsg && (
-            <p className="rounded-xl border border-red-400/20 bg-red-400/5 p-3 text-sm text-red-300">
+            <motion.p
+              initial={{
+                opacity: 0,
+                y: -5,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              className="rounded-xl border border-red-400/20 bg-red-400/5 p-3 text-sm text-red-300"
+            >
               {errorMsg}
-            </p>
+            </motion.p>
           )}
+
+          {/* SUBMIT */}
 
           <button
             type="submit"
@@ -659,9 +698,7 @@ export function RegistroForm() {
       </div>
 
       {/* ==========================================================
-          ==========================================================
           MOBILE
-          ==========================================================
           ========================================================== */}
 
       <div className="block lg:hidden">
@@ -683,6 +720,8 @@ export function RegistroForm() {
             </div>
 
             <div className="flex flex-col gap-3">
+              {/* NOMBRE */}
+
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>
                   Nombre del equipo
@@ -698,6 +737,8 @@ export function RegistroForm() {
                 />
               </div>
 
+              {/* PROBLEMÁTICA */}
+
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>
                   Problemática
@@ -710,10 +751,7 @@ export function RegistroForm() {
                   }
                   className={`${inputClass} cursor-pointer`}
                 >
-                  <option
-                    value=""
-                    className="bg-zinc-900"
-                  >
+                  <option value="" className="bg-zinc-900">
                     Selecciona una problemática
                   </option>
 
@@ -740,36 +778,42 @@ export function RegistroForm() {
                 </select>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label className={labelClass}>
-                  Teléfono de contacto
-                </label>
-
-                <input
-                  type="tel"
-                  className={inputClass}
-                  value={telefonoContacto}
-                  onChange={(e) =>
-                    setTelefonoContacto(e.target.value)
-                  }
-                  placeholder="844 123 4567"
-                />
-              </div>
+              {/* LÍDER */}
 
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>
-                  Correo de contacto
+                  Líder del equipo
                 </label>
 
-                <input
-                  type="email"
-                  className={inputClass}
-                  value={correoContacto}
+                <select
+                  value={liderId}
                   onChange={(e) =>
-                    setCorreoContacto(e.target.value)
+                    setLiderId(e.target.value)
                   }
-                  placeholder="equipo@correo.com"
-                />
+                  className={`${inputClass} cursor-pointer`}
+                >
+                  <option
+                    value=""
+                    className="bg-zinc-900"
+                  >
+                    Selecciona al líder
+                  </option>
+
+                  {integrantes.map((it, i) => (
+                    <option
+                      key={it.id}
+                      value={it.id}
+                      className="bg-zinc-900"
+                    >
+                      {it.nombre.trim() ||
+                        `Integrante ${i + 1}`}
+                    </option>
+                  ))}
+                </select>
+
+                <p className="text-center text-[11px] text-white/30">
+                  El líder debe ser uno de los integrantes.
+                </p>
               </div>
             </div>
           </section>
@@ -820,9 +864,17 @@ export function RegistroForm() {
 
                     <div className="mb-4 flex items-center justify-between">
                       <div>
-                        <span className="text-sm font-semibold text-white">
-                          Integrante {i + 1}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-semibold text-white">
+                            Integrante {i + 1}
+                          </span>
+
+                          {liderId === it.id && (
+                            <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-2 py-0.5 text-[10px] font-medium text-cyan-300">
+                              Líder
+                            </span>
+                          )}
+                        </div>
 
                         <p className="mt-0.5 text-[11px] text-white/30">
                           Datos del alumno
@@ -929,8 +981,6 @@ export function RegistroForm() {
                       </div>
                     </div>
 
-                    {/* SEPARADOR */}
-
                     <div className="my-5 h-px bg-white/5" />
 
                     {/* EMERGENCIA */}
@@ -941,8 +991,7 @@ export function RegistroForm() {
                       </p>
 
                       <p className="mt-1 text-[11px] leading-5 text-white/30">
-                        Persona a contactar en caso de
-                        emergencia.
+                        Persona a contactar en caso de emergencia.
                       </p>
 
                       <div className="mt-3 flex flex-col gap-3">
@@ -953,9 +1002,7 @@ export function RegistroForm() {
 
                           <input
                             className={inputClass}
-                            value={
-                              it.emergencia.nombre
-                            }
+                            value={it.emergencia.nombre}
                             onChange={(e) =>
                               actualizarEmergencia(
                                 it.id,
@@ -975,9 +1022,7 @@ export function RegistroForm() {
                           <input
                             type="tel"
                             className={inputClass}
-                            value={
-                              it.emergencia.telefono
-                            }
+                            value={it.emergencia.telefono}
                             onChange={(e) =>
                               actualizarEmergencia(
                                 it.id,
@@ -996,9 +1041,7 @@ export function RegistroForm() {
 
                           <input
                             className={inputClass}
-                            value={
-                              it.emergencia.parentesco
-                            }
+                            value={it.emergencia.parentesco}
                             onChange={(e) =>
                               actualizarEmergencia(
                                 it.id,
