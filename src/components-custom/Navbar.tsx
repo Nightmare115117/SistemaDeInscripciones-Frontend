@@ -181,7 +181,7 @@ export function Navbar() {
                 variant="ghost"
                 className="glass-liquid !rounded-full px-4 text-xs text-white hover:text-white hover:bg-white/10"
               >
-                Registro
+                <Link to="/registro">Registro</Link>
               </Button>
 
               <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -259,7 +259,7 @@ export function Navbar() {
                         className="glass-liquid !rounded-full text-white hover:text-white hover:bg-white/10"
                         onClick={() => setMenuOpen(false)}
                       >
-                        <Link to="@/pages/Registro">Registrarme</Link>
+                        <Link to="/registro">Registrarme</Link>
                       </Button>
 
                       <Button
